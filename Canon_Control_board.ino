@@ -113,7 +113,7 @@ void setup() {
   display.setCursor(52, 56);
   display.println(version);
   display.display();
-  delay(1000);
+  delay(2000);
 
   DisplayMainMenu();
 }
@@ -147,7 +147,7 @@ void loop() {
     // ----- Create Single shoot if Stop button pressed ----- 
     if (!digitalRead(stoShoot)){
       digitalWrite(Shoot, HIGH);
-      delay(sht);               // Delay 150ms
+      delay(sht);               // Delay 250ms
       digitalWrite(Shoot, LOW);
       display.clearDisplay();
       display.setTextSize(2);
@@ -199,7 +199,8 @@ void loop() {
         display.println(i);
 
         // Left Time
-        leftime = ( ( (float)dt*nop - (float)i) / (float)60) + ( ( (float)sht / (float)1000 ) * ((float)nop - (float)i) ) / (float)60;
+        //                     (2*(60 - 59))/60                   +          (250/1000)            *       (60-59)              /  60
+        leftime = ( ( (float)dt*((float)nop - (float)i)) / (float)60) + ( ( (float)sht / (float)1000 ) * ((float)nop - (float)i) ) / (float)60;
         display.setTextSize(1);
         display.setCursor(0, 56);
         display.print("Time left:  ");
@@ -213,7 +214,7 @@ void loop() {
         digitalWrite(Shoot, HIGH);
         delay(sht);               // Delay 250ms
         digitalWrite(Shoot, LOW);
-        delay(dt*1000);           // Delay dt * 1000ms
+        delay(dt*1000);           // Delay dt * 1000ms = secundum
      
         if (!digitalRead(stoShoot)){
           staShootState = false;
