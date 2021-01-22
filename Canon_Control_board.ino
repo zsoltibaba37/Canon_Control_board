@@ -23,13 +23,16 @@ int aVal;
 int swVal;
 
 // Star - Stop Button
-const int staShoot = 8; // Start Time-lapse
-const int stoShoot = 9; // Stop or Single Shoot
+const int staShoot = 8;          // Start Time-lapse
+const int stoShoot = 9;          // Stop or Single Shoot
 unsigned int staShootState;      // Variable to enter 'Time-lapse' sequence
 
 // Output to 
 const int Shoot = 10; // Shoot port
-const int sht = 250;  // Shoot time in ms <- CHANGE THIS VARIABLE WHEN CAMERA DOESN'T TAKE PICTURE, BECAUSE THE TIME IS TO SHORT
+const int sht = 250;  // Shoot time in ms   <- CHANGE THIS VARIABLE WHEN CAMERA DOESN'T TAKE PICTURE, BECAUSE THE TIME IS TO SHORT
+const int bulb = 40;  // 40 * 1000ms        <- This variable is for long exposure
+const int bulbmin = 40;   // 40 * 1000ms    <- Max exposure
+const int bulbmax = 300;  // 300 * 1000ms   <- Max exposure
 
 // Menu State 0 = Main Menu ; 1 = Set Delay Time ; 2 = Number of pictures
 unsigned int menu = 0;
@@ -409,5 +412,17 @@ void DisplayNumberOfPictures(){
   display.setCursor(50, 40);
   display.setTextSize(2);
   display.println(nop);
+  display.display();
+}
+
+// Display BulbMode
+void DisplayBulbMode(){
+  display.clearDisplay();
+  display.setTextSize(1);
+  display.setCursor(25, 18);
+  display.println("Bulb exp. Time: ");
+  display.setCursor(50, 40);
+  display.setTextSize(2);
+  display.println(bulb);
   display.display();
 }
